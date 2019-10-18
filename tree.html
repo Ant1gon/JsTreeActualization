@@ -86,7 +86,6 @@
                         </label>
                         <input style="margin-top:5px; display:block;" type="button" value="Підтвердити" id="addNameBTN" onclick="UpdateOldName()">
                     </div>
-
                     <input style="margin-top:5px; display:block;" type="button" value="Змінити тип" id="changeTypePanelBTN" onclick="сhangeTypeBTNF()">
                     <div id="сhangeTypePanel" style="display: none;">
                         <label for="typeSelectNew">Тип
@@ -731,46 +730,46 @@
     };
 
     function setTypes() {
-            removeOptions(document.getElementById("typeSelect"));
-            var t = $("#jstree").jstree("get_selected", true);
-            var ttt = t[0].id;
-            var req = new XMLHttpRequest();
-            rqstr = "https://cc.ent.ukrgas.com.ua/gas/api/data/v8.1/rgc_settlements?$select=rgc_name,_rgc_type_value&$filter=rgc_settlementid%20eq%20" + ttt;
-            req.open("GET", rqstr, true);
-            req.setRequestHeader("OData-MaxVersion", "4.0");
-            req.setRequestHeader("OData-Version", "4.0");
-            req.setRequestHeader("Accept", "application/json");
-            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-            req.onreadystatechange = function() {
-                if (this.readyState === 4) {
-                    req.onreadystatechange = null;
-                    if (this.status === 200) {
-                        var results = JSON.parse(this.response);
-                        for (var i = 0; i < results.value.length; i++) {
-                            var _rgc_type_value = results.value[i]["_rgc_type_value"];
-                            var _rgc_settlementid = results.value[i]["rgc_settlementid"];
-                            var _rgc_name = results.value[i]["rgc_name"];
-                            var arrTypes = getTypeField2(_rgc_type_value);
-                            var x = document.getElementById("typeSelect");
-                            var option = document.createElement("option");
-                            for (var i = 0; i < arrTypes.length; i++) {
-                                var j = getChilds(arrTypes[i]);
-                                if (j != undefined) {
-                                    $.each(j, function(key, value) {
-                                        var option = document.createElement("option");
-                                        option.text = value;
-                                        option.id = key;
-                                        x.add(option);
-                                    });
-                                };
+        removeOptions(document.getElementById("typeSelect"));
+        var t = $("#jstree").jstree("get_selected", true);
+        var ttt = t[0].id;
+        var req = new XMLHttpRequest();
+        rqstr = "https://cc.ent.ukrgas.com.ua/gas/api/data/v8.1/rgc_settlements?$select=rgc_name,_rgc_type_value&$filter=rgc_settlementid%20eq%20" + ttt;
+        req.open("GET", rqstr, true);
+        req.setRequestHeader("OData-MaxVersion", "4.0");
+        req.setRequestHeader("OData-Version", "4.0");
+        req.setRequestHeader("Accept", "application/json");
+        req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        req.onreadystatechange = function() {
+            if (this.readyState === 4) {
+                req.onreadystatechange = null;
+                if (this.status === 200) {
+                    var results = JSON.parse(this.response);
+                    for (var i = 0; i < results.value.length; i++) {
+                        var _rgc_type_value = results.value[i]["_rgc_type_value"];
+                        var _rgc_settlementid = results.value[i]["rgc_settlementid"];
+                        var _rgc_name = results.value[i]["rgc_name"];
+                        var arrTypes = getTypeField2(_rgc_type_value);
+                        var x = document.getElementById("typeSelect");
+                        var option = document.createElement("option");
+                        for (var i = 0; i < arrTypes.length; i++) {
+                            var j = getChilds(arrTypes[i]);
+                            if (j != undefined) {
+                                $.each(j, function(key, value) {
+                                    var option = document.createElement("option");
+                                    option.text = value;
+                                    option.id = key;
+                                    x.add(option);
+                                });
                             };
                         };
-                    } else {
-                        Xrm.Utility.alertDialog(this.statusText);
                     };
+                } else {
+                    Xrm.Utility.alertDialog(this.statusText);
                 };
             };
-            req.send();
+        };
+        req.send();
     };
     
     function setAllTypes(){
