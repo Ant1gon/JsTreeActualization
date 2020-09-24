@@ -1,6 +1,4 @@
-<html>
-
-<head>
+<html><head>
     <meta charset="utf-8">
     <script type="text/javascript" src="/_static/_common/scripts/jsTree.js"></script>
     <link rel="stylesheet" type="text/css" href="/_static/_common/styles/jsTree.css">
@@ -23,28 +21,36 @@
         background-size: cover;
         font: 400 18px Arial;
     }
+    
+    input[type="button"]:hover, input[type="submit"]:hover {
+        box-shadow: inset 0 -1px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgb(65 105 187);
+    }
+
+    input[type="button"]{
+        margin-top:5px; display:block;
+    }
 
     .error {
         border: 2px solid red;
     }
     </style>
-</head>
+<meta><style type="text/css">P { margin: 0; }</style></head>
 
-<body onfocusout="parent.setEmailRange();" style="overflow-wrap: break-word;">
+<body onfocusout="parent.setEmailRange();" style="overflow-wrap: break-word; word-wrap: break-word;">
     <div style="left: 15%; width: 600px; height: 580px; margin-top: 5%; position: fixed; padding:10px" id="tree-modal" class="form" onsubmit="setData(false)">
         <form action="#" onsubmit="setData(false)">
             <table class="row" style="border-collapse: collapse; margin-left: 0px; margin-bottom: 5px ">
                 <tbody>
                     <tr>
                         <td>
-                            <input class="cancel" type="button" value="Відміна" style="width:80px; height:50px; margin-left:0px; ">
+                            <input class="cancel" type="button" value="Відміна" style="width:80px; height:65px; margin-left:0px; ">
                         </td>
                         <td>
                             <textarea style="border-radius:5px;" id="address" rows="2" cols="150" readonly=""></textarea>
                             <input type="text" class="inputs" id="search" oninput="Search()" placeholder="Підсвітити" autocomplete="off">
                         </td>
                         <td>
-                            <input style="width:80px; height:50px; " onclick="setData(false)" value="Внести" type="button" class="submit" tabindex="4">
+                            <input style="width:80px; height:65px;margin-top:0px; " onclick="setData(false)" value="Внести" type="button" class="submit" tabindex="4">
                         </td>
                     </tr>
                 </tbody>
@@ -52,7 +58,7 @@
             <div class="row" style="height: 500px; width:70%; overflow: auto; background-color: white; border-radius:5px;">
                 <div id="jstree"></div>
                 <div style="position:absolute; right:10px; top:13%; width:25%" id="buttons">
-                    <input style="margin-top:5px; display:block;" type="button" value="Додати Елемент" class="Add Element" id="addCancelBtn" onclick="addElementBTN()" tabindex="1">
+                    <input type="button" value="Додати Елемент" class="Add Element" id="addCancelBtn" onclick="addElementBTN()" tabindex="1">
                     <div id="inputs" style="display: none;">
                         <label for="name">Назва
                             <img alt="Обязательное" src="/_imgs/imagestrips/transparent_spacer.gif" class="ms-crm-ImageStrip-frm_required">
@@ -66,9 +72,9 @@
                             <select id="typeSelect" style="width: 100%;">
                             </select>
                         </label>
-                        <input style="margin-top:5px; display:block;" type="button" value="Додати" id="AddBTN" onclick="Add(true)" tabindex="3">
+                        <input type="button" value="Додати" id="AddBTN" onclick="Add(true)" tabindex="3">
                     </div>
-                    <input style="margin-top:5px; display:block;" type="button" value="Перейменувати" class="Update Element" id="updateElementBTN" onclick="updateBTN()">
+                    <input type="button" value="Перейменувати" class="Update Element" id="updateElementBTN" onclick="updateBTN()">
                     <div id="inputsUpdate" style="display: none;">
                         <label for="newName">Нова назва
                             <textarea type="text" id="newName" style="width: 96%;" placeholder="Нова назва" class=""></textarea>
@@ -76,29 +82,38 @@
                         <label for="SaveOldName" style="margin-left:15%;">
                             <input type="checkbox" id="SaveOldName" name="SaveOldName" style="position:absolute; right:40%;">Зберегти стару назву
                         </label>
-                        <input style="margin-top:5px; display:block;" type="button" value="Підтвердити" id="UpdateBTN" onclick="Update()">
+                        <input type="button" value="Підтвердити" id="UpdateBTN" onclick="Update()">
                     </div>
-
-                    <input style="margin-top:5px; display:block;" type="button" value="Додати стару назву" id="addOldNameBTN" onclick="addOldNameBTNF()">
+                    <input type="button" value="Додати стару назву" id="addOldNameBTN" onclick="addOldNameBTNF()">
                     <div id="AddOldNameButtons" style="display: none;">
                         <label for="addOldName">Стара назва
                             <textarea type="text" id="addOldName" style="width: 96%;" placeholder="Стара назва" class=""></textarea>
                         </label>
-                        <input style="margin-top:5px; display:block;" type="button" value="Підтвердити" id="addNameBTN" onclick="UpdateOldName()">
+                        <input type="button" value="Підтвердити" id="addNameBTN" onclick="UpdateOldName()">
                     </div>
-                    <input style="margin-top:5px; display:block;" type="button" value="Змінити тип" id="changeTypePanelBTN" onclick="сhangeTypeBTNF()">
+                    <input type="button" value="Змінити тип" id="changeTypePanelBTN" onclick="сhangeTypeBTNF()">
                     <div id="сhangeTypePanel" style="display: none;">
                         <label for="typeSelectNew">Тип
                             <img alt="Обязательное" src="/_imgs/imagestrips/transparent_spacer.gif" class="ms-crm-ImageStrip-frm_required"><br>
                             <select id="typeSelectNew" style="width: 100%;"></select>
                         </label>
-                        <input style="margin-top:5px; display:block;" type="button" value="Підтвердити" id="changeType" onclick="changeTypeFunk()">
+                        <input type="button" value="Підтвердити" id="changeType" onclick="changeTypeFunk()">
                     </div>
 
-                    <input style="margin-top:15px; display:block;" type="button" value="Оновити" id="refreshBTN" onclick="refresh_node()">
+                    
+
+                    <input style="margin-top:15px;" type="button" value="Оновити" id="refreshBTN" onclick="refresh_node()">
                     <div id="adminPanel" style="display:none;">
                         <input class="submit" id="delete" style="margin-top:20px; display:block;" type="button" value="Видалити" onclick="Delete()">
-                        <input id="test" style="margin-top:5px; display:block;" type="button" value="Test" onclick="Test()"> <!-- onclick="Add(false)  findDuplicate()  setData(true) Test()"> -->
+                        <input type="button" value="Змінити підпорядкування" id="changeParentBTN" onclick="сhangeParentBTNF()">
+                        <div id="сhangeParentPanel" style="display: none;">
+                            <label for="parentSelectNew">Підпорядкувати
+                                <img alt="Обязательное" src="/_imgs/imagestrips/transparent_spacer.gif" class="ms-crm-ImageStrip-frm_required"><br>
+                                <select id="parentSelect" style="width: 100%;"></select>
+                            </label>
+                            <input type="button" value="Підтвердити" id="changeType" onclick="changeParentFunk()">
+                        </div>
+                        <input id="test" type="button" value="Test" onclick="Test()">
                     </div>
                 </div>
             </div>
@@ -122,9 +137,23 @@
                     'data': function(node) {
                         return { 'id': node.id };
                     }
-                }
+                },
+                "html_titles" : true,  
+                "load_open" : true 
+                //"multiple" : false,
             },
-            "plugins": ["search"],
+            "plugins": [
+                "themes", 
+                "json_data", 
+                "ui", 
+                "cookies", 
+                "crrm",
+                "search", 
+                "checkbox"
+            ],
+            "checkbox" : {
+                "keep_selected_style" : false
+            },
             "search": {
                 "case_sensitive": false,
                 "show_only_matches": false
@@ -142,8 +171,16 @@
                                 $('#jstree').jstree("select_node", y, true).bind("select_node.jstree", function() {
                                     setTypes();
                                     setNameToUpdate();
+                                    setParentsSelector();
                                 });
-                            };
+                                $('#jstree').bind("deselect_node.jstree", function() {
+                                    setParentsSelector();                                    
+                                    //console.log("deselect_node");
+                                });
+                                ////*////
+                                $("#jstree").jstree("load_node",y);
+                                ////*////
+                            };                            
                             var other = "#jstree #" + y;
                             $(other)[0].scrollIntoView();
                         };
@@ -155,44 +192,14 @@
 
     function Test() {
         console.log("test");
-        $("#jstree").jstree("deselect_all", true);
-    };
+        //$("#jstree").jstree("deselect_all", true);
+        
+        //console.log($("#jstree").jstree("load_node", $("#jstree").jstree("get_checked", true)));
+        //console.log($("#jstree").jstree("get_children_dom", $("#jstree").jstree("get_checked", true)));
+         
+        //console.log($("#jstree").jstree("get_checked", true));
+        //console.log($("#jstree").jstree("get_selected", true));
 
-
-    function hideAdminPanel() {
-        var role = Xrm.Page.context.getUserRoles();
-        var delRoles = ["55d2f43e-ad08-e311-8620-00155d001525", "3319aaff-a901-e811-80cf-00155d0f313b"];
-        var hide = false;
-        $.each(role, function(key, value) {
-            $.each(delRoles, function(key1, value1) {
-                if (value == value1) hide = true;
-            });
-        });
-        if (hide) {
-            document.getElementById('adminPanel').style.display = 'block';
-            //document.getElementById('changeTypePanelBTN').style.display = 'block';
-        };
-    };
-
-    function refresh_node() {
-        var t = $("#jstree").jstree("get_selected", true);
-        $('#jstree').jstree(true).refresh_node(t[0].id);
-        $('#jstree').jstree("open_node", t[0].id);
-    };
-
-    function refreshParentNode() {
-        setTimeout(function() {
-            var t = $("#jstree").jstree("get_selected", true);
-            var parentId = $("#jstree").jstree("get_parent", t[0].id);
-            $('#jstree').jstree(true).refresh_node(parentId);
-        }, 1000);
-    };
-
-    function removeOptions(selectbox) {
-        var i;
-        for (i = selectbox.options.length - 1; i >= 0; i--) {
-            selectbox.remove(i);
-        };
     };
 
     function Search() {
@@ -200,94 +207,65 @@
         $("#jstree").jstree("search", search);
     };
 
-    function getChilds(typeName) {
-        var childDict = new Object();
-        var childDict = {
-            "#": { "93e1908a-3e14-e611-80d9-00155d0f0906": "Країна" },
-            "rgc_country": { "b0e0889b-3e14-e611-80d9-00155d0f0906": "Область" }, //область рай знач
-            "rgc_state": { //район нас/пункт
-                "c804caa6-3e14-e611-80d9-00155d0f0906": "Район Обл. значения",
-                "e60c1e03-3f14-e611-80d9-00155d0f0906": "СМТ",
-                "9c55500c-3f14-e611-80d9-00155d0f0906": "Село",
+    function UpdateOldName() {
+        if (document.getElementById("addOldName").value == "") {
+            alert("Помилка: Поле 'Стара назва' не може бути порожнім!");
+            document.getElementById("addOldName").className = document.getElementById("addOldName").className + " error";
+        } else {
+            var t = $("#jstree").jstree("get_selected", true);
+            var parent_value = "";
+            var type_value = "";
+            var rgc_name = "";
+            var req = new XMLHttpRequest();
+            req.open("GET", "https://cc.ent.ukrgas.com.ua/gas/api/data/v8.1/rgc_settlements(" + t[0].id + ")?$select=rgc_name,_rgc_parent_value,_rgc_type_value", false);
+            req.setRequestHeader("OData-MaxVersion", "4.0");
+            req.setRequestHeader("OData-Version", "4.0");
+            req.setRequestHeader("Accept", "application/json");
+            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+            req.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
+            req.onreadystatechange = function() {
+                if (this.readyState === 4) {
+                    req.onreadystatechange = null;
+                    if (this.status === 200) {
+                        var result = JSON.parse(this.response);
+                        rgc_name = result["rgc_name"];
+                        parent_value = result["_rgc_parent_value"];
+                        type_value = result["_rgc_type_value"];
+                    } else {
+                        Xrm.Utility.alertDialog(this.statusText);
+                    }
+                }
+            };
+            req.send();
+            var confirmStr = "Підтвердження оновлення\nСтара Назва: " + document.getElementById('addOldName').value;
+            if (confirm(confirmStr)) { //typeName
+                var t = $("#jstree").jstree("get_selected", true);
+                var entity = {};
+                entity.rgc_old_name = document.getElementById("addOldName").value;
+                entity["rgc_parent@odata.bind"] = "/rgc_settlements(" + parent_value + ")";
+                entity["rgc_type@odata.bind"] = "/rgk_settlement_types(" + type_value + ")";
 
-                "07912DDA-A526-E811-80D5-00155D0F313B": "Місто", //
-                "42742082-885D-E811-8122-02BF0A300F39": "Військове містечко", //
-                "85340D3B-930A-E811-80CF-00155D0F313B": "Міська рада", //
-                "57C4F8F7-D28F-E811-80DF-00155D0F0D4E": "Селищна рада", //
-                "2844C7E2-930A-E811-80CF-00155D0F313B": "Сільська рада", //
-                "DCDB7E3D-DCE8-E811-8135-00155D0F0938": "Кооператив", //
-                "DD7DE62B-CB2D-E811-811E-02BF0A300F39": "Коттеджне поселення", //
-                "A84C0C12-0DDD-E811-8134-02BF0A300F39": "Селище" //
-            },
-            "rgc_county": {
-                "4b0454d5-3e14-e611-80d9-00155d0f0906": "Місто",
-                "e60c1e03-3f14-e611-80d9-00155d0f0906": "СМТ",
-                "9c55500c-3f14-e611-80d9-00155d0f0906": "Село",
-                "0F176B82-DA0F-E811-8119-02BF0A300F39": "Садовое товариство", //
-                "DCDB7E3D-DCE8-E811-8135-00155D0F0938": "Кооператив", //
-                "DD7DE62B-CB2D-E811-811E-02BF0A300F39": "Коттеджне поселення", //
-                "A84C0C12-0DDD-E811-8134-02BF0A300F39": "Селище" //
-                //селище
-            },
-            "rgc_locality": {
-                "8E2896f2-3e14-e611-80d9-00155d0f0906": "Вулиця",
-                "a80ced51-3f14-e611-80d9-00155d0f0906": "Провулок",
-                "9bbf6f22-3f14-e611-80d9-00155d0f0906": "Площа",
-                "ef418e49-3f14-e611-80d9-00155d0f0906": "Проспект",
-                "5769492d-3f14-e611-80d9-00155d0f0906": "Бульвар",
-                "456A74AA-805E-E811-8123-00155D0F0938": "Сквер", //
-                "7E54CDFB-A526-E811-80D5-00155D0F313B": "Район міського значення", //
-                "68533C37-2C79-E811-80DE-00155D0F0D4E": "Мікрорайон", //
-                "1D46F454-F8FC-E611-80EB-00155D0F0938": "В'їзд", //
-                "77064A73-9DFD-E611-80EB-00155D0F0938": "Аллея", //
-                "FF4323B3-7655-E611-80E5-00155D0F0939": "Жилий масив", //
-                "AFD01FB6-D964-E811-8124-00155D0F0938": "Заїзд", //
-                "811E19DC-568E-E711-8108-02BF0A300F39": "Кілометр", //
-                "1139DD7D-AA54-E611-80E5-00155D0F0939": "Парк", //
-                "B2BEFF81-3C18-E711-80EF-00155D0F0938": "Переїзд", //
-                "A80CED51-3F14-E611-80D9-00155D0F0906": "Провулок", //
-                "456A74AA-805E-E811-8123-00155D0F0938": "Сквер", //
-                "3367B078-5E5E-E811-8123-00155D0F0938": "Урочище", //
-                "C4450C0D-4865-E611-80E6-00155D0F0939": "Квартал", // 
-                "D00364A0-5029-E911-8144-00155D0F0938": "Совхоз", //
-                "0F176B82-DA0F-E811-8119-02BF0A300F39": "Садовое товариство", //
-                "c72ccfc8-0ef8-e611-80eb-00155d0f0938": "Проріз",
-                "fab5c76e-3f14-e611-80d9-00155d0f0906": "Проїзд",
-                "a7157858-4364-e611-80e6-00155d0f0939": "Шоссе",
-                "02c71d60-0b69-e611-80e6-00155d0f0939": "Узвіз",
-                "e15e1577-cf3b-e711-8100-00155d0f0939": "Тупик"
-            },
-            "rgc_localcounty": {
-                "8E2896f2-3e14-e611-80d9-00155d0f0906": "Вулиця",
-                "a80ced51-3f14-e611-80d9-00155d0f0906": "Провулок",
-                "9bbf6f22-3f14-e611-80d9-00155d0f0906": "Площа",
-                "ef418e49-3f14-e611-80d9-00155d0f0906": "Проспект",
-                "5769492d-3f14-e611-80d9-00155d0f0906": "Бульвар",
-                "456A74AA-805E-E811-8123-00155D0F0938": "Сквер", //
-                "1D46F454-F8FC-E611-80EB-00155D0F0938": "В'їзд", //
-                "77064A73-9DFD-E611-80EB-00155D0F0938": "Аллея", //
-                "FF4323B3-7655-E611-80E5-00155D0F0939": "Жилий масив", //
-                "AFD01FB6-D964-E811-8124-00155D0F0938": "Заїзд", //
-                "811E19DC-568E-E711-8108-02BF0A300F39": "Кілометр", //
-                "1139DD7D-AA54-E611-80E5-00155D0F0939": "Парк", //
-                "B2BEFF81-3C18-E711-80EF-00155D0F0938": "Переїзд", //
-                "A80CED51-3F14-E611-80D9-00155D0F0906": "Провулок", //
-                "456A74AA-805E-E811-8123-00155D0F0938": "Сквер", //
-                "3367B078-5E5E-E811-8123-00155D0F0938": "Урочище", //
-                "C4450C0D-4865-E611-80E6-00155D0F0939": "Квартал", // 
-                "D00364A0-5029-E911-8144-00155D0F0938": "Совхоз", //
-                "0F176B82-DA0F-E811-8119-02BF0A300F39": "Садовое товариство", //
-                "c72ccfc8-0ef8-e611-80eb-00155d0f0938": "Проріз",
-                "fab5c76e-3f14-e611-80d9-00155d0f0906": "Проїзд",
-                "a7157858-4364-e611-80e6-00155d0f0939": "Шоссе",
-                "02c71d60-0b69-e611-80e6-00155d0f0939": "Узвіз",
-                "e15e1577-cf3b-e711-8100-00155d0f0939": "Тупик"
-            },
-            "rgc_street": {
-                "12054e81-3f14-e611-80d9-00155d0f0906": "Будинок"
-            }
+                var req = new XMLHttpRequest();
+                req.open("PATCH", "https://cc.ent.ukrgas.com.ua/gas/api/data/v8.1/rgc_settlements(" + t[0].id + ")", false);
+                req.setRequestHeader("OData-MaxVersion", "4.0");
+                req.setRequestHeader("OData-Version", "4.0");
+                req.setRequestHeader("Accept", "application/json");
+                req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                req.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
+                req.onreadystatechange = function() {
+                    if (this.readyState === 4) {
+                        req.onreadystatechange = null;
+                        if (this.status === 204) {
+                            //Success - No Return Data - Do Something
+                        } else {
+                            Xrm.Utility.alertDialog(this.statusText);
+                        }
+                    }
+                };
+                req.send(JSON.stringify(entity));
+                refreshParentNode();
+            };
         };
-        return childDict[typeName];
     };
 
     function getTypeField2(id) {
@@ -374,139 +352,154 @@
         }
     };
 
-    function addElementBTN() {
-        if (document.getElementById('addCancelBtn').value == "Додати Елемент") {
-            setTypes();
-            document.getElementById("name").value = "";
-            document.getElementById("oldName").value = "";
-            document.getElementById("name").className = document.getElementById("name").className.replace(" error", "");
-            document.getElementById("typeSelect").className = document.getElementById("typeSelect").className.replace(" error", "");
-            document.getElementById('inputs').style.display = 'block';
-
-            document.getElementById('inputsUpdate').style.display = "none";
-            document.getElementById('updateElementBTN').value = "Перейменувати";
-
-            document.getElementById('AddOldNameButtons').style.display = "none";
-            document.getElementById('addOldNameBTN').value = "Додати стару назву";
-
-            document.getElementById('сhangeTypePanel').style.display = "none";
-            document.getElementById('changeTypePanelBTN').value = "Змінити тип";
-
-            document.getElementById('addCancelBtn').value = 'Відмінити';
-            document.getElementById("name").focus();
-        } else if (document.getElementById('addCancelBtn').value == 'Відмінити') {
-            document.getElementById("name").value = "";
-            document.getElementById("oldName").value = "";
-            document.getElementById('inputs').style.display = 'none';
-            document.getElementById('addCancelBtn').value = "Додати Елемент";
-        };
+    function refresh_node() {
+        var t = $("#jstree").jstree("get_selected", true);
+        $('#jstree').jstree(true).refresh_node(t[0].id);
+        $('#jstree').jstree("open_node", t[0].id);
     };
 
-    function updateBTN() {
-        if (document.getElementById('updateElementBTN').value == "Перейменувати") {
-            setNameToUpdate();
-            document.getElementById('newName').className = document.getElementById("name").className.replace(" error", "");
-            document.getElementById('inputsUpdate').style.display = "block";
-
-            document.getElementById('inputs').style.display = 'none';
-            document.getElementById('addCancelBtn').value = 'Додати Елемент';
-
-            document.getElementById('AddOldNameButtons').style.display = "none";
-            document.getElementById('addOldNameBTN').value = "Додати стару назву";
-
-            document.getElementById('сhangeTypePanel').style.display = "none";
-            document.getElementById('changeTypePanelBTN').value = "Змінити тип";
-
-            document.getElementById('updateElementBTN').value = "Відмінити";
-            document.getElementById('newName').focus();
-        } else if (document.getElementById('updateElementBTN').value == "Відмінити") {
-            document.getElementById('newName').value = "";
-            document.getElementById('inputsUpdate').style.display = "none";
-            document.getElementById('updateElementBTN').value = "Перейменувати";
+    function hideAdminPanel() {
+        var role = Xrm.Page.context.getUserRoles();
+        var delRoles = ["55d2f43e-ad08-e311-8620-00155d001525", "3319aaff-a901-e811-80cf-00155d0f313b"];
+        var hide = false;
+        $.each(role, function(key, value) {
+            $.each(delRoles, function(key1, value1) {
+                if (value == value1) hide = true;
+            });
+        });
+        if (hide) {
+            document.getElementById('adminPanel').style.display = 'block';
+            //document.getElementById('changeTypePanelBTN').style.display = 'block';
         };
     };
-
-    function addOldNameBTNF() {
-        if (document.getElementById('addOldNameBTN').value == "Додати стару назву") {
-            //setNameToUpdate();
-            document.getElementById('inputsUpdate').style.display = "none";
-            document.getElementById('updateElementBTN').value = "Перейменувати";
-
-            document.getElementById('inputs').style.display = 'none';
-            document.getElementById('addCancelBtn').value = 'Додати Елемент';
-
-            document.getElementById('сhangeTypePanel').style.display = "none";
-            document.getElementById('changeTypePanelBTN').value = "Змінити тип";
-
-            document.getElementById('addOldName').className = document.getElementById("name").className.replace(" error", "");
-            document.getElementById('AddOldNameButtons').style.display = "block";
-            document.getElementById('addOldNameBTN').value = "Відмінити";
-            document.getElementById('addOldName').focus();
-        } else if (document.getElementById('addOldNameBTN').value == "Відмінити") {
-            document.getElementById('addOldName').value = "";
-            document.getElementById('AddOldNameButtons').style.display = "none";
-            document.getElementById('addOldNameBTN').value = "Додати стару назву";
-        };
-    };
-
-    function сhangeTypeBTNF() {
-        if (document.getElementById('changeTypePanelBTN').value == "Змінити тип") {
-            setAllTypes();
-            document.getElementById('inputs').style.display = 'none';
-            document.getElementById('addCancelBtn').value = 'Додати Елемент';
-
-            document.getElementById('inputsUpdate').style.display = "none";
-            document.getElementById('updateElementBTN').value = "Перейменувати";
-
-            document.getElementById('AddOldNameButtons').style.display = "none";
-            document.getElementById('addOldNameBTN').value = "Додати стару назву";
-
-            //document.getElementById('addOldName').className = document.getElementById("name").className.replace(" error", "");
-            document.getElementById('сhangeTypePanel').style.display = "block";
-            document.getElementById('changeTypePanelBTN').value = "Відмінити";
-            //document.getElementById('addOldName').focus();
-        } else if (document.getElementById('changeTypePanelBTN').value == "Відмінити") {
-            //document.getElementById('addOldName').value = "";
-            document.getElementById('сhangeTypePanel').style.display = "none";
-            document.getElementById('changeTypePanelBTN').value = "Змінити тип";
-        };
-    };
-
 
     function changeTypeFunk() {
-    	var t = $("#jstree").jstree("get_selected", true);
-    	var e = document.getElementById('typeSelectNew');    	
-    	
+        var t = $("#jstree").jstree("get_selected", true);
+        var e = document.getElementById('typeSelectNew');
+
         if (e.options[e.selectedIndex].value != undefined) {
-        	console.log(e.options[e.selectedIndex].value);
+            //console.log(e.options[e.selectedIndex].value);
             var typeName = e.options[e.selectedIndex].value;
         };
         var typeId = e.options[e.selectedIndex].id;
 
-    	var confirmStr = "Упевнені що хочете змінити тип на "+ typeName;
-    	if (confirm(confirmStr)) {
-    		var entity = {};
-			entity["rgc_type@odata.bind"] = "/rgk_settlement_types("+typeId+")";
-			var req = new XMLHttpRequest();
-			req.open("PATCH", Xrm.Page.context.getClientUrl() + "/api/data/v8.1/rgc_settlements("+t[0].id+")", true);
-			req.setRequestHeader("OData-MaxVersion", "4.0");
-			req.setRequestHeader("OData-Version", "4.0");
-			req.setRequestHeader("Accept", "application/json");
-			req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-			req.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
-			req.onreadystatechange = function() {
-			    if (this.readyState === 4) {
-			        req.onreadystatechange = null;
-			        if (this.status === 204) {
-			            //Success - No Return Data - Do Something
-			        } else {
-			            Xrm.Utility.alertDialog(this.statusText);
-			        }
-			    }
-			};
-			req.send(JSON.stringify(entity));
-    		refreshParentNode();
-    	}
+        var confirmStr = "Упевнені що хочете змінити тип на " + typeName;
+        if (confirm(confirmStr)) {
+            var entity = {};
+            entity["rgc_type@odata.bind"] = "/rgk_settlement_types(" + typeId + ")";
+            var req = new XMLHttpRequest();
+            req.open("PATCH", Xrm.Page.context.getClientUrl() + "/api/data/v8.1/rgc_settlements(" + t[0].id + ")", true);
+            req.setRequestHeader("OData-MaxVersion", "4.0");
+            req.setRequestHeader("OData-Version", "4.0");
+            req.setRequestHeader("Accept", "application/json");
+            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+            req.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
+            req.onreadystatechange = function() {
+                if (this.readyState === 4) {
+                    req.onreadystatechange = null;
+                    if (this.status === 204) {
+                        //Success - No Return Data - Do Something
+                    } else {
+                        Xrm.Utility.alertDialog(this.statusText);
+                    }
+                }
+            };
+            req.send(JSON.stringify(entity));
+            refreshParentNode();
+        }
+    };    
+
+    function setParentsSelector() {
+        // body...
+        removeOptions(document.getElementById("parentSelect"));
+        var idsArr=[];
+        $("#jstree").jstree("get_selected", true).forEach( el => {
+            if(el['text'].includes('р-н.')){
+                idsArr.push(el);
+                var x = document.getElementById("parentSelect");
+                var option = document.createElement("option");
+                for (var i = 0; i < idsArr.length; i++) {
+                    //console.log(idsArr[i]);
+                    option.text = idsArr[i]['text'];
+                    option.id = idsArr[i]['id'];
+                    x.add(option);
+                };  
+            }            
+            //idsArr.push(el['id']);
+            // var result = getTypeFromId(el['id']);
+            // console.log(result);
+        });        
+        //document.getElementById("newName").value = name;
+        //console.log(idsArr);
+    };
+
+    function changeParentFunk() {
+        var p = document.querySelector("#parentSelect");
+        var childrenToChange=[];
+        var filterStr = "";
+
+        if( p.options.length > 1){
+            if (confirm(`Упевнені що хочете змінити підпорядкування на ${p.selectedOptions[0].value}?`)) {
+                for(var i=0; i < p.options.length; i++){
+                    if(i != p.selectedIndex){                      
+                        if( filterStr.length == 0 ){
+                            filterStr =`_rgc_parent_value eq ${p.options[i].id}`
+                        } else { 
+                            filterStr += ` or _rgc_parent_value eq ${p.options[i].id} `; 
+                        }
+                    }                    
+                } 
+
+                var req = new XMLHttpRequest();
+                var rqstr = encodeURI(`https://cc.ent.ukrgas.com.ua/gas/api/data/v8.1/rgc_settlements?$select=rgc_name,_rgc_parent_value,rgc_settlementid&$filter=${filterStr}`);
+                req.open("GET", rqstr, true);
+                req.setRequestHeader("OData-MaxVersion", "4.0");
+                req.setRequestHeader("OData-Version", "4.0");
+                req.setRequestHeader("Accept", "application/json");
+                req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                req.onreadystatechange = function() {
+                    if (this.readyState === 4) {
+                        req.onreadystatechange = null;
+                        if (this.status === 200) {
+                            var results = JSON.parse(this.response);   
+                            for (var i = 0; i < results.value.length; i++) {
+                                childrenToChange.push(results.value[i]["rgc_settlementid"]);
+                            };
+                            childrenToChange.forEach( (id) =>{
+                                //console.log(`${id} updated. to parent ${p.options[p.selectedIndex].value}`);
+
+                                var entity = {};
+                                entity["rgc_parent@odata.bind"] = `/rgc_settlements(${p.options[p.selectedIndex].id})`;
+                                var req = new XMLHttpRequest();
+                                req.open("PATCH", `https://cc.ent.ukrgas.com.ua/gas/api/data/v8.1/rgc_settlements(${id})`, true);
+                                req.setRequestHeader("OData-MaxVersion", "4.0");
+                                req.setRequestHeader("OData-Version", "4.0");
+                                req.setRequestHeader("Accept", "application/json");
+                                req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                                req.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
+                                req.onreadystatechange = function() {
+                                    if (this.readyState === 4) {
+                                        req.onreadystatechange = null;
+                                        if (this.status === 204) {
+                                            //Success - No Return Data - Do Something
+                                        } else {
+                                            Xrm.Utility.alertDialog(this.statusText);
+                                        }
+                                    }
+                                };
+                                req.send(JSON.stringify(entity));
+                                refreshParentNode();
+                            })        
+                        } else {
+                            Xrm.Utility.alertDialog(this.statusText);
+                        };
+                    };
+                };
+                req.send();                        
+            };
+        }else{
+            alert("Необхідно вибрати більше одного району");
+        }
     };
 
     function Update() {
@@ -551,67 +544,6 @@
                 if (x) {
                     entity.rgc_old_name = rgc_name;
                 };
-                entity["rgc_parent@odata.bind"] = "/rgc_settlements(" + parent_value + ")";
-                entity["rgc_type@odata.bind"] = "/rgk_settlement_types(" + type_value + ")";
-
-                var req = new XMLHttpRequest();
-                req.open("PATCH", "https://cc.ent.ukrgas.com.ua/gas/api/data/v8.1/rgc_settlements(" + t[0].id + ")", false);
-                req.setRequestHeader("OData-MaxVersion", "4.0");
-                req.setRequestHeader("OData-Version", "4.0");
-                req.setRequestHeader("Accept", "application/json");
-                req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-                req.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
-                req.onreadystatechange = function() {
-                    if (this.readyState === 4) {
-                        req.onreadystatechange = null;
-                        if (this.status === 204) {
-                            //Success - No Return Data - Do Something
-                        } else {
-                            Xrm.Utility.alertDialog(this.statusText);
-                        }
-                    }
-                };
-                req.send(JSON.stringify(entity));
-                refreshParentNode();
-            };
-        };
-    };
-
-    function UpdateOldName() {
-        if (document.getElementById("addOldName").value == "") {
-            alert("Помилка: Поле 'Стара назва' не може бути порожнім!");
-            document.getElementById("addOldName").className = document.getElementById("addOldName").className + " error";
-        } else {
-            var t = $("#jstree").jstree("get_selected", true);
-            var parent_value = "";
-            var type_value = "";
-            var rgc_name = "";
-            var req = new XMLHttpRequest();
-            req.open("GET", "https://cc.ent.ukrgas.com.ua/gas/api/data/v8.1/rgc_settlements(" + t[0].id + ")?$select=rgc_name,_rgc_parent_value,_rgc_type_value", false);
-            req.setRequestHeader("OData-MaxVersion", "4.0");
-            req.setRequestHeader("OData-Version", "4.0");
-            req.setRequestHeader("Accept", "application/json");
-            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-            req.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
-            req.onreadystatechange = function() {
-                if (this.readyState === 4) {
-                    req.onreadystatechange = null;
-                    if (this.status === 200) {
-                        var result = JSON.parse(this.response);
-                        rgc_name = result["rgc_name"];
-                        parent_value = result["_rgc_parent_value"];
-                        type_value = result["_rgc_type_value"];
-                    } else {
-                        Xrm.Utility.alertDialog(this.statusText);
-                    }
-                }
-            };
-            req.send();
-            var confirmStr = "Підтвердження оновлення\nСтара Назва: " + document.getElementById('addOldName').value;
-            if (confirm(confirmStr)) { //typeName
-                var t = $("#jstree").jstree("get_selected", true);
-                var entity = {};
-                entity.rgc_old_name = document.getElementById("addOldName").value;
                 entity["rgc_parent@odata.bind"] = "/rgc_settlements(" + parent_value + ")";
                 entity["rgc_type@odata.bind"] = "/rgk_settlement_types(" + type_value + ")";
 
@@ -771,9 +703,9 @@
         };
         req.send();
     };
-    
-    function setAllTypes(){
-		removeOptions(document.getElementById("typeSelectNew"));
+
+    function setAllTypes() {
+        removeOptions(document.getElementById("typeSelectNew"));
         //var t = $("#jstree").jstree("get_selected", true);
         var req = new XMLHttpRequest();
         rqstr = "https://cc.ent.ukrgas.com.ua/gas/api/data/v8.1/rgk_settlement_types()?$select=rgk_name,rgk_settlement_typeid";
@@ -787,13 +719,13 @@
                 req.onreadystatechange = null;
                 if (this.status === 200) {
                     var results = JSON.parse(this.response);
-                    console.log(results);
+                    //console.log(results);
                     var x = document.getElementById("typeSelectNew");
-                    for (var i = 0; i < results.value.length; i++) {                     
+                    for (var i = 0; i < results.value.length; i++) {
                         var option = document.createElement("option");
                         option.text = results.value[i]["rgk_name"];
                         option.id = results.value[i]["rgk_settlement_typeid"];
-                    	x.add(option); 
+                        x.add(option);
                     };
                 } else {
                     Xrm.Utility.alertDialog(this.statusText);
@@ -811,14 +743,14 @@
         var typeId = e.options[e.selectedIndex].id;
 
         if (document.getElementById("name").value == "") {
-            alert("Eror: The Name field can`t be empty! \nОшибка: Поле Имя не может быть пустым!");
+            alert("Помилка: Поле Ім'я не може бути порожнім!");
             document.getElementById("name").className = document.getElementById("name").className + " error";
         } else {
             if (confirm("Підтвердження додавання\nНазва: " + document.getElementById("name").value + "\nСтара назва: " + document.getElementById('oldName').value + "\nТип розташування:" + typeName)) {
 
                 var find = findDuplicate();
                 setTimeout(function() { var find = findDuplicate() }, 2000);
-                console.log(find);
+                //console.log(find);
 
                 if (!find) {
                     document.getElementById("name").className = document.getElementById("name").className.replace(" error", "");
@@ -828,37 +760,75 @@
                     var entity = {};
                     entity.rgc_name = document.getElementById("name").value;
 
-                    if (document.getElementById('oldName').value != "") entity.rgc_old_name = document.getElementById('oldName').value;
-                    entity["rgc_parent@odata.bind"] = "/rgc_settlements(" + currentNode[0].id + ")";
-                    entity["rgc_type@odata.bind"] = "/rgk_settlement_types(" + typeId + ")";
 
-                    var req = new XMLHttpRequest();
-                    req.open("POST", "https://cc.ent.ukrgas.com.ua/gas/api/data/v8.1/rgc_settlements", false);
-                    req.setRequestHeader("OData-MaxVersion", "4.0");
-                    req.setRequestHeader("OData-Version", "4.0");
-                    req.setRequestHeader("Accept", "application/json");
-                    req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-                    req.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
-                    req.onreadystatechange = function() {
-                        if (this.readyState === 4) {
-                            req.onreadystatechange = null;
-                            if (this.status === 204) {
-                                var uri = this.getResponseHeader("OData-EntityId");
-                                var regExp = /\(([^)]+)\)/;
-                                var matches = regExp.exec(uri);
-                                var newEntityId = matches[1];
-                            } else {
-                                Xrm.Utility.alertDialog(this.statusText);
-                            }
+                    if(currentNode[0].id == "93e1908a-3e14-e611-80d9-00155d0f0906")
+                    {   
+                        if (confirm("Ви намагаєтесь створити елемент розташування з типом: КРАЇНА. Ви впевнені що хочете це зробити? ")) {
+                            if (document.getElementById('oldName').value != "") entity.rgc_old_name = document.getElementById('oldName').value;
+                            entity["rgc_parent@odata.bind"] = "/rgc_settlements(" + currentNode[0].id + ")";
+                            entity["rgc_type@odata.bind"] = "/rgk_settlement_types(" + typeId + ")";
+
+                            var req = new XMLHttpRequest();
+                            req.open("POST", "https://cc.ent.ukrgas.com.ua/gas/api/data/v8.1/rgc_settlements", false);
+                            req.setRequestHeader("OData-MaxVersion", "4.0");
+                            req.setRequestHeader("OData-Version", "4.0");
+                            req.setRequestHeader("Accept", "application/json");
+                            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                            req.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
+                            req.onreadystatechange = function() {
+                                if (this.readyState === 4) {
+                                    req.onreadystatechange = null;
+                                    if (this.status === 204) {
+                                        var uri = this.getResponseHeader("OData-EntityId");
+                                        var regExp = /\(([^)]+)\)/;
+                                        var matches = regExp.exec(uri);
+                                        var newEntityId = matches[1];
+                                    } else {
+                                        Xrm.Utility.alertDialog(this.statusText);
+                                    }
+                                }
+                            };
+                            req.send(JSON.stringify(entity));
+                            refresh_node();
+                            document.getElementById("name").value = "";
+                            document.getElementById("oldName").value = "";
+                            document.getElementById('inputs').style.display = 'none';
+                            document.getElementById('addCancelBtn').value = 'Додати Елемент';
+                            document.getElementById("jstree").focus();
                         }
-                    };
-                    req.send(JSON.stringify(entity));
-                    refresh_node();
-                    document.getElementById("name").value = "";
-                    document.getElementById("oldName").value = "";
-                    document.getElementById('inputs').style.display = 'none';
-                    document.getElementById('addCancelBtn').value = 'Додати Елемент';
-                    document.getElementById("jstree").focus();
+                    }else{
+                        if (document.getElementById('oldName').value != "") entity.rgc_old_name = document.getElementById('oldName').value;
+                        entity["rgc_parent@odata.bind"] = "/rgc_settlements(" + currentNode[0].id + ")";
+                        entity["rgc_type@odata.bind"] = "/rgk_settlement_types(" + typeId + ")";
+
+                        var req = new XMLHttpRequest();
+                        req.open("POST", "https://cc.ent.ukrgas.com.ua/gas/api/data/v8.1/rgc_settlements", false);
+                        req.setRequestHeader("OData-MaxVersion", "4.0");
+                        req.setRequestHeader("OData-Version", "4.0");
+                        req.setRequestHeader("Accept", "application/json");
+                        req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                        req.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
+                        req.onreadystatechange = function() {
+                            if (this.readyState === 4) {
+                                req.onreadystatechange = null;
+                                if (this.status === 204) {
+                                    var uri = this.getResponseHeader("OData-EntityId");
+                                    var regExp = /\(([^)]+)\)/;
+                                    var matches = regExp.exec(uri);
+                                    var newEntityId = matches[1];
+                                } else {
+                                    Xrm.Utility.alertDialog(this.statusText);
+                                }
+                            }
+                        };
+                        req.send(JSON.stringify(entity));
+                        refresh_node();
+                        document.getElementById("name").value = "";
+                        document.getElementById("oldName").value = "";
+                        document.getElementById('inputs').style.display = 'none';
+                        document.getElementById('addCancelBtn').value = 'Додати Елемент';
+                        document.getElementById("jstree").focus();
+                    }
                 } else {
                     alert("Попытка создания дубликата!\nИзмените имя или тип");
                     document.getElementById("name").className = document.getElementById("name").className + " error";
@@ -896,6 +866,109 @@
         };
     };
 
+    function refreshParentNode() {
+        setTimeout(function() {
+            var t = $("#jstree").jstree("get_selected", true);
+            var parentId = $("#jstree").jstree("get_parent", t[0].id);
+            $('#jstree').jstree(true).refresh_node(parentId);
+        }, 1000);
+    };
+
+    function removeOptions(selectbox) {
+        var i;
+        for (i = selectbox.options.length - 1; i >= 0; i--) {
+            selectbox.remove(i);
+        };
+    };
+
+    function getChilds(typeName) {
+        var childDict = new Object();
+        var childDict = {
+            "#": { "93e1908a-3e14-e611-80d9-00155d0f0906": "Країна" },
+            "rgc_country": { "b0e0889b-3e14-e611-80d9-00155d0f0906": "Область" }, //область рай знач
+            "rgc_state": { //район нас/пункт
+                "c804caa6-3e14-e611-80d9-00155d0f0906": "Район Обл. значения",
+                "e60c1e03-3f14-e611-80d9-00155d0f0906": "СМТ",
+                "9c55500c-3f14-e611-80d9-00155d0f0906": "Село",
+
+                "07912DDA-A526-E811-80D5-00155D0F313B": "Місто", //
+                "42742082-885D-E811-8122-02BF0A300F39": "Військове містечко", //
+                "85340D3B-930A-E811-80CF-00155D0F313B": "Міська рада", //
+                "57C4F8F7-D28F-E811-80DF-00155D0F0D4E": "Селищна рада", //
+                "2844C7E2-930A-E811-80CF-00155D0F313B": "Сільська рада", //
+                "DCDB7E3D-DCE8-E811-8135-00155D0F0938": "Кооператив", //
+                "DD7DE62B-CB2D-E811-811E-02BF0A300F39": "Коттеджне поселення", //
+                "A84C0C12-0DDD-E811-8134-02BF0A300F39": "Селище" //
+            },
+            "rgc_county": {
+                "4b0454d5-3e14-e611-80d9-00155d0f0906": "Місто",
+                "e60c1e03-3f14-e611-80d9-00155d0f0906": "СМТ",
+                "9c55500c-3f14-e611-80d9-00155d0f0906": "Село",
+                "0F176B82-DA0F-E811-8119-02BF0A300F39": "Садовое товариство", //
+                "DCDB7E3D-DCE8-E811-8135-00155D0F0938": "Кооператив", //
+                "DD7DE62B-CB2D-E811-811E-02BF0A300F39": "Коттеджне поселення", //
+                "A84C0C12-0DDD-E811-8134-02BF0A300F39": "Селище" //
+                //селище
+            },
+            "rgc_locality": {
+                "8E2896f2-3e14-e611-80d9-00155d0f0906": "Вулиця",
+                "a80ced51-3f14-e611-80d9-00155d0f0906": "Провулок",
+                "9bbf6f22-3f14-e611-80d9-00155d0f0906": "Площа",
+                "ef418e49-3f14-e611-80d9-00155d0f0906": "Проспект",
+                "5769492d-3f14-e611-80d9-00155d0f0906": "Бульвар",
+                "456A74AA-805E-E811-8123-00155D0F0938": "Сквер", //
+                "7E54CDFB-A526-E811-80D5-00155D0F313B": "Район міського значення", //
+                "68533C37-2C79-E811-80DE-00155D0F0D4E": "Мікрорайон", //
+                "1D46F454-F8FC-E611-80EB-00155D0F0938": "В'їзд", //
+                "77064A73-9DFD-E611-80EB-00155D0F0938": "Аллея", //
+                "FF4323B3-7655-E611-80E5-00155D0F0939": "Жилий масив", //
+                "AFD01FB6-D964-E811-8124-00155D0F0938": "Заїзд", //
+                "811E19DC-568E-E711-8108-02BF0A300F39": "Кілометр", //
+                "1139DD7D-AA54-E611-80E5-00155D0F0939": "Парк", //
+                "B2BEFF81-3C18-E711-80EF-00155D0F0938": "Переїзд", //
+                "456A74AA-805E-E811-8123-00155D0F0938": "Сквер", //
+                "3367B078-5E5E-E811-8123-00155D0F0938": "Урочище", //
+                "C4450C0D-4865-E611-80E6-00155D0F0939": "Квартал", // 
+                "D00364A0-5029-E911-8144-00155D0F0938": "Совхоз", //
+                "0F176B82-DA0F-E811-8119-02BF0A300F39": "Садовое товариство", //
+                "c72ccfc8-0ef8-e611-80eb-00155d0f0938": "Проріз",
+                "fab5c76e-3f14-e611-80d9-00155d0f0906": "Проїзд",
+                "a7157858-4364-e611-80e6-00155d0f0939": "Шоссе",
+                "02c71d60-0b69-e611-80e6-00155d0f0939": "Узвіз",
+                "e15e1577-cf3b-e711-8100-00155d0f0939": "Тупик"
+            },
+            "rgc_localcounty": {
+                "8E2896f2-3e14-e611-80d9-00155d0f0906": "Вулиця",
+                "a80ced51-3f14-e611-80d9-00155d0f0906": "Провулок",
+                "9bbf6f22-3f14-e611-80d9-00155d0f0906": "Площа",
+                "ef418e49-3f14-e611-80d9-00155d0f0906": "Проспект",
+                "5769492d-3f14-e611-80d9-00155d0f0906": "Бульвар",
+                "456A74AA-805E-E811-8123-00155D0F0938": "Сквер", //
+                "1D46F454-F8FC-E611-80EB-00155D0F0938": "В'їзд", //
+                "77064A73-9DFD-E611-80EB-00155D0F0938": "Аллея", //
+                "FF4323B3-7655-E611-80E5-00155D0F0939": "Жилий масив", //
+                "AFD01FB6-D964-E811-8124-00155D0F0938": "Заїзд", //
+                "811E19DC-568E-E711-8108-02BF0A300F39": "Кілометр", //
+                "1139DD7D-AA54-E611-80E5-00155D0F0939": "Парк", //
+                "B2BEFF81-3C18-E711-80EF-00155D0F0938": "Переїзд", //
+                "A80CED51-3F14-E611-80D9-00155D0F0906": "Провулок", //
+                "456A74AA-805E-E811-8123-00155D0F0938": "Сквер", //
+                "3367B078-5E5E-E811-8123-00155D0F0938": "Урочище", //
+                "C4450C0D-4865-E611-80E6-00155D0F0939": "Квартал", // 
+                "D00364A0-5029-E911-8144-00155D0F0938": "Совхоз", //
+                "0F176B82-DA0F-E811-8119-02BF0A300F39": "Садовое товариство", //
+                "c72ccfc8-0ef8-e611-80eb-00155d0f0938": "Проріз",
+                "fab5c76e-3f14-e611-80d9-00155d0f0906": "Проїзд",
+                "a7157858-4364-e611-80e6-00155d0f0939": "Шоссе",
+                "02c71d60-0b69-e611-80e6-00155d0f0939": "Узвіз",
+                "e15e1577-cf3b-e711-8100-00155d0f0939": "Тупик"
+            },
+            "rgc_street": {
+                "12054e81-3f14-e611-80d9-00155d0f0906": "Будинок"
+            }
+        };
+        return childDict[typeName];
+    };
 
     function getAddressIds(getTypeField) {
         var address = "";
@@ -998,7 +1071,7 @@
                             var _rgc_type_value = result["_rgc_type_value"];
                             var _rgc_settlementid = ttid;
 
-                            console.log("Type: " + _rgc_type_value + " SetId: " + _rgc_settlementid + " Name: " + _rgc_name);
+                            //console.log("Type: " + _rgc_type_value + " SetId: " + _rgc_settlementid + " Name: " + _rgc_name);
 
                             var lookup = new Array();
                             lookup[0] = new Object();
@@ -1048,7 +1121,182 @@
             parent.frames[0].Xrm.Page.getControl("line3").setFocus();
         }, 750);
     };
-    </script>
-</body>
 
-</html>
+    function getTypeFromId(id) {
+        var req = new XMLHttpRequest();
+        req.open("GET", "https://cc.ent.ukrgas.com.ua/gas/api/data/v8.1/rgc_settlements(" + id + ")?$select=rgc_name,_rgc_type_value", false);
+        req.setRequestHeader("OData-MaxVersion", "4.0");
+        req.setRequestHeader("OData-Version", "4.0");
+        req.setRequestHeader("Accept", "application/json");
+        req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        req.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
+        req.onreadystatechange = function() {
+            if (this.readyState === 4) {
+                req.onreadystatechange = null;
+                if (this.status === 200) {                    
+                    var result = JSON.parse(this.response);
+                    var _rgc_name = result["rgc_name"];
+                    var _rgc_type_value = result["_rgc_type_value"];
+                    var _rgc_settlementid = id;
+                    if(_rgc_type_value == "c804caa6-3e14-e611-80d9-00155d0f0906"){
+                        //console.log(result);
+                        return result;
+                    }
+                } else {
+                    Xrm.Utility.alertDialog(this.statusText);
+                }
+            }
+        };
+        req.send();
+
+        //return _rgc_type_value;
+    }
+
+    function addElementBTN() {
+        if (document.getElementById('addCancelBtn').value == "Додати Елемент") {
+            setTypes();
+            document.getElementById("name").value = "";
+            document.getElementById("oldName").value = "";
+            document.getElementById("name").className = document.getElementById("name").className.replace(" error", "");
+            document.getElementById("typeSelect").className = document.getElementById("typeSelect").className.replace(" error", "");
+            document.getElementById('inputs').style.display = 'block';
+
+            document.getElementById('inputsUpdate').style.display = "none";
+            document.getElementById('updateElementBTN').value = "Перейменувати";
+
+            document.getElementById('AddOldNameButtons').style.display = "none";
+            document.getElementById('addOldNameBTN').value = "Додати стару назву";
+
+            document.getElementById('сhangeTypePanel').style.display = "none";
+            document.getElementById('changeTypePanelBTN').value = "Змінити тип";
+
+            document.getElementById('addCancelBtn').value = 'Відмінити';
+            document.getElementById("name").focus();
+
+            document.getElementById('сhangeParentPanel').style.display = "none";
+            document.getElementById('changeParentBTN').value = "Змінити підпорядкування";
+
+        } else if (document.getElementById('addCancelBtn').value == 'Відмінити') {
+            document.getElementById("name").value = "";
+            document.getElementById("oldName").value = "";
+            document.getElementById('inputs').style.display = 'none';
+            document.getElementById('addCancelBtn').value = "Додати Елемент";
+        };
+    };
+
+    function updateBTN() {
+        if (document.getElementById('updateElementBTN').value == "Перейменувати") {
+            setNameToUpdate();
+            document.getElementById('newName').className = document.getElementById("name").className.replace(" error", "");
+            document.getElementById('inputsUpdate').style.display = "block";
+
+            document.getElementById('inputs').style.display = 'none';
+            document.getElementById('addCancelBtn').value = 'Додати Елемент';
+
+            document.getElementById('AddOldNameButtons').style.display = "none";
+            document.getElementById('addOldNameBTN').value = "Додати стару назву";
+
+            document.getElementById('сhangeTypePanel').style.display = "none";
+            document.getElementById('changeTypePanelBTN').value = "Змінити тип";
+
+            document.getElementById('updateElementBTN').value = "Відмінити";
+            document.getElementById('newName').focus();
+
+            document.getElementById('сhangeParentPanel').style.display = "none";
+            document.getElementById('changeParentBTN').value = "Змінити підпорядкування";
+
+        } else if (document.getElementById('updateElementBTN').value == "Відмінити") {
+            document.getElementById('newName').value = "";
+            document.getElementById('inputsUpdate').style.display = "none";
+            document.getElementById('updateElementBTN').value = "Перейменувати";
+        };
+    };
+
+    function addOldNameBTNF() {
+        if (document.getElementById('addOldNameBTN').value == "Додати стару назву") {
+            //setNameToUpdate();
+            document.getElementById('inputsUpdate').style.display = "none";
+            document.getElementById('updateElementBTN').value = "Перейменувати";
+
+            document.getElementById('inputs').style.display = 'none';
+            document.getElementById('addCancelBtn').value = 'Додати Елемент';
+
+            document.getElementById('сhangeTypePanel').style.display = "none";
+            document.getElementById('changeTypePanelBTN').value = "Змінити тип";
+
+            document.getElementById('addOldName').className = document.getElementById("name").className.replace(" error", "");
+            document.getElementById('AddOldNameButtons').style.display = "block";
+            document.getElementById('addOldNameBTN').value = "Відмінити";
+            document.getElementById('addOldName').focus();            
+
+            document.getElementById('сhangeParentPanel').style.display = "none";
+            document.getElementById('changeParentBTN').value = "Змінити підпорядкування";
+
+        } else if (document.getElementById('addOldNameBTN').value == "Відмінити") {
+            document.getElementById('addOldName').value = "";
+            document.getElementById('AddOldNameButtons').style.display = "none";
+            document.getElementById('addOldNameBTN').value = "Додати стару назву";
+        };
+    };
+
+    function сhangeTypeBTNF() {
+        if (document.getElementById('changeTypePanelBTN').value == "Змінити тип") {
+            setAllTypes();
+            document.getElementById('inputs').style.display = 'none';
+            document.getElementById('addCancelBtn').value = 'Додати Елемент';
+
+            document.getElementById('inputsUpdate').style.display = "none";
+            document.getElementById('updateElementBTN').value = "Перейменувати";
+
+            document.getElementById('AddOldNameButtons').style.display = "none";
+            document.getElementById('addOldNameBTN').value = "Додати стару назву";
+
+            document.getElementById('сhangeTypePanel').style.display = "block";
+            document.getElementById('changeTypePanelBTN').value = "Відмінити";
+
+            document.getElementById('сhangeParentPanel').style.display = "none";
+            document.getElementById('changeParentBTN').value = "Змінити підпорядкування";
+
+        } else if (document.getElementById('changeTypePanelBTN').value == "Відмінити") {
+
+            document.getElementById('сhangeTypePanel').style.display = "none";
+            document.getElementById('changeTypePanelBTN').value = "Змінити тип";
+        };
+    };
+
+    function сhangeParentBTNF() {
+        if (document.getElementById('changeParentBTN').value == "Змінити підпорядкування") {
+            //setAllTypes();
+            setParentsSelector();
+
+            document.getElementById('inputs').style.display = 'none';
+            document.getElementById('addCancelBtn').value = 'Додати Елемент';
+
+            document.getElementById('inputsUpdate').style.display = "none";
+            document.getElementById('updateElementBTN').value = "Перейменувати";
+
+            document.getElementById('AddOldNameButtons').style.display = "none";
+            document.getElementById('addOldNameBTN').value = "Додати стару назву";
+
+            document.getElementById('сhangeParentPanel').style.display = "block";
+            document.getElementById('changeParentBTN').value = "Відмінити";
+
+        } else if (document.getElementById('changeParentBTN').value == "Відмінити") {
+            document.getElementById('сhangeParentPanel').style.display = "none";
+            document.getElementById('changeParentBTN').value = "Змінити підпорядкування";
+        };
+    };
+
+    document.addEventListener('keyup', function(e){
+    // This would be triggered by pressing CTRL + A
+        if (e.altKey && e.keyCode == 83) {
+            setData(false);
+        }
+
+    // Or with ALT + A
+    //if (e.altKey && e.keyCode == 65) {
+    //    window.location.href = "http://ourcodeworld.com"; 
+    //}
+    }, false);
+    </script>
+</body></html>
