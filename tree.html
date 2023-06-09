@@ -126,7 +126,7 @@
         } else {
             document.getElementById('address').value = getAddressIds('address');
         };
-        hideAdminPanel();
+        let isAdmin = hideAdminPanel();
 
         $('#jstree').jstree({
             'core': {
@@ -148,8 +148,8 @@
                 "ui", 
                 "cookies", 
                 "crrm",
-                "search", 
-                "checkbox"
+                //isAdmin ? "checkbox" : "",
+                "search"
             ],
             "checkbox" : {
                 "keep_selected_style" : false
@@ -192,6 +192,7 @@
 
     function Test() {
         console.log("test");
+          
         //$("#jstree").jstree("deselect_all", true);
         
         //console.log($("#jstree").jstree("load_node", $("#jstree").jstree("get_checked", true)));
@@ -274,7 +275,7 @@
         } else {
             var typeDict = {
                 "rgc_country": ["93e1908a-3e14-e611-80d9-00155d0f0906"], //страна
-                "rgc_state": ["b0e0889b-3e14-e611-80d9-00155d0f0906"],
+                "rgc_state": ["b0e0889b-3e14-e611-80d9-00155d0f0906", "a3a48688-4886-eb11-b892-02bf0a300f39"],
                 "rgc_county": ["c804caa6-3e14-e611-80d9-00155d0f0906",
                     "85340d3b-930a-e811-80cf-00155d0f313b"
                 ],
@@ -328,10 +329,14 @@
                     "fAb5c76e-3f14-e611-80d9-00155d0f0906", //
                     "c72ccfc8-0ef8-e611-80eb-00155d0f0938", //
                     "5769492d-3f14-e611-80d9-00155d0f0906",
-                    "fab5c76e-3f14-e611-80d9-00155d0f0906"
+                    "fab5c76e-3f14-e611-80d9-00155d0f0906",
+                    "b62bfde5-cd5f-eb11-b88d-02bf0a300f39"
                 ], //
 
-                "rgc_house": ["12054e81-3f14-e611-80d9-00155d0f0906"], //дом
+                "rgc_house": [
+                    "12054e81-3f14-e611-80d9-00155d0f0906",
+                    "67dcf097-6fae-eb11-b89e-02bf0a300f39"
+                    ], //дом
                 "line3": [
                     "89628a89-3f14-e611-80d9-00155d0f0906",
                     "8d92aae3-de4c-e611-80e5-00155d0f0939",
@@ -361,16 +366,17 @@
     function hideAdminPanel() {
         var role = Xrm.Page.context.getUserRoles();
         var delRoles = ["55d2f43e-ad08-e311-8620-00155d001525", "3319aaff-a901-e811-80cf-00155d0f313b"];
-        var hide = false;
+        var isAdmin = false;
         $.each(role, function(key, value) {
             $.each(delRoles, function(key1, value1) {
-                if (value == value1) hide = true;
+                if (value == value1) isAdmin = true;
             });
         });
-        if (hide) {
+        if (isAdmin) {
             document.getElementById('adminPanel').style.display = 'block';
             //document.getElementById('changeTypePanelBTN').style.display = 'block';
         };
+        return isAdmin;
     };
 
     function changeTypeFunk() {
@@ -682,19 +688,24 @@
                         var _rgc_settlementid = results.value[i]["rgc_settlementid"];
                         var _rgc_name = results.value[i]["rgc_name"];
                         var arrTypes = getTypeField2(_rgc_type_value);
-                        var x = document.getElementById("typeSelect");
-                        var option = document.createElement("option");
-                        for (var i = 0; i < arrTypes.length; i++) {
-                            var j = getChilds(arrTypes[i]);
-                            if (j != undefined) {
-                                $.each(j, function(key, value) {
-                                    var option = document.createElement("option");
-                                    option.text = value;
-                                    option.id = key;
-                                    x.add(option);
-                                });
+                        if(arrTypes.length != 0){
+                            var x = document.getElementById("typeSelect");
+                            var option = document.createElement("option");
+                            for (var i = 0; i < arrTypes.length; i++) {
+                                var j = getChilds(arrTypes[i]);
+                                if (j != undefined) {
+                                    $.each(j, function(key, value) {
+                                        var option = document.createElement("option");
+                                        option.text = value;
+                                        option.id = key;
+                                        x.add(option);
+                                    });
+                                };
                             };
-                        };
+                        }else {
+                            alert("Невідомий тип розташування.\nПовідомте про дану проблему відділ тех підтримки");                                
+                            console.log(_rgc_type_value);
+                        }                        
                     };
                 } else {
                     Xrm.Utility.alertDialog(this.statusText);
@@ -841,29 +852,32 @@
 
     function Delete() {
         var t = $("#jstree").jstree("get_selected", true);
-        if (confirm(" Подтвердите удаление : " + t[0].text + " ?")) {
-            var req = new XMLHttpRequest();
-            req.open("DELETE", "https://cc.ent.ukrgas.com.ua/gas/api/data/v8.1/rgc_settlements(" + t[0].id + ")", true);
-            req.setRequestHeader("Accept", "application/json");
-            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-            req.setRequestHeader("OData-MaxVersion", "4.0");
-            req.setRequestHeader("OData-Version", "4.0");
-            req.onreadystatechange = function() {
-                if (this.readyState === 4) {
-                    req.onreadystatechange = null;
-                    if (this.status === 204 || this.status === 1223) {
-                        //Success - No Return Data - Do Something
-                    } else {
-                        Xrm.Utility.alertDialog(this.statusText);
-                    };
-                };
-            };
-            req.send();
-            /*$("#jstree").jstree("deselect_all",false);
-            var yt = $("#jstree").jstree("get_selected", true);
-            $('#jstree').jstree("select_node", yt, true)*/
-            refreshParentNode();
-        };
+        for(let i=0; i < t.length; i++){
+        	//console.log(t[i]);
+        	if (confirm(`Ви дійсно бажаєте видалити: \n\n ${t[i].text} ?`)) {
+	            var req = new XMLHttpRequest();
+	            req.open("DELETE", `https://cc.ent.ukrgas.com.ua/gas/api/data/v8.1/rgc_settlements(${t[i].id})`, true);
+	            //req.open("DELETE", "https://cc.ent.ukrgas.com.ua/gas/api/data/v8.1/rgc_settlements(" + t[i].id + ")", true);
+	            req.setRequestHeader("Accept", "application/json");
+	            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+	            req.setRequestHeader("OData-MaxVersion", "4.0");
+	            req.setRequestHeader("OData-Version", "4.0");
+	            req.onreadystatechange = function() {
+	                if (this.readyState === 4) {
+	                    req.onreadystatechange = null;
+	                    if (this.status === 204 || this.status === 1223) {
+	                    	alert("Видалено");                  	
+	            			refreshParentNode();
+	                        //Success - No Return Data - Do Something
+	                    } else {
+	                        Xrm.Utility.alertDialog(this.statusText);
+	                    };
+	                };
+	            };
+	            req.send();
+	            refreshParentNode();
+	        };
+        }        
     };
 
     function refreshParentNode() {
@@ -964,7 +978,8 @@
                 "e15e1577-cf3b-e711-8100-00155d0f0939": "Тупик"
             },
             "rgc_street": {
-                "12054e81-3f14-e611-80d9-00155d0f0906": "Будинок"
+                "12054e81-3f14-e611-80d9-00155d0f0906": "Будинок",
+            	"67dcf097-6fae-eb11-b89e-02bf0a300f39": "Гуртожиток"
             }
         };
         return childDict[typeName];
@@ -1033,10 +1048,7 @@
         var t = $("#jstree").jstree("get_selected", true);
         var tt = t[0].parents;
         var ttt = t[0].id;
-        //console.log(t);
         var line3 = t[0].text;
-        //console.log(tt);
-        //console.log(ttt);
 
         if (t[0].id != tt[0]) {
             tt.unshift(t[0].id);
@@ -1051,9 +1063,7 @@
         parent.frames[0].Xrm.Page.getAttribute("line3").setValue(null);
 
         for (var i = tt.length - 1; i >= 0; i--) {
-            //console.log(tt[i]);
             var ttid = tt[i];
-            //console.log(ttid);
             if (tt[i] != "#") {
                 var req = new XMLHttpRequest();
                 req.open("GET", "https://cc.ent.ukrgas.com.ua/gas/api/data/v8.1/rgc_settlements(" + ttid + ")?$select=rgc_name,_rgc_type_value", false);
@@ -1071,8 +1081,6 @@
                             var _rgc_type_value = result["_rgc_type_value"];
                             var _rgc_settlementid = ttid;
 
-                            //console.log("Type: " + _rgc_type_value + " SetId: " + _rgc_settlementid + " Name: " + _rgc_name);
-
                             var lookup = new Array();
                             lookup[0] = new Object();
                             lookup[0].entityType = "rgc_settlement";
@@ -1081,26 +1089,26 @@
                             lookup[0].type = "10138";
                             lookup[0].typename = "rgc_settlement";
 
-
                             var arr = getTypeField2(_rgc_type_value);
-                            if (arr.length != 0 && arr.length < 2) {
-                                var get_typeFromId = arr[0];
-                            } else if (arr.length != 0) {
-                                var get_typeFromId = "";
-                                //console.log(arr);
-                                for (var i = 0; i < arr.length; i++) {
-                                    if (get_typeFromId == "") {
-                                        if (parent.frames[0].Xrm.Page.getAttribute(arr[i]).getValue() == null) {
-                                            var get_typeFromId = arr[i];
-                                            //console.log(get_typeFromId);
+
+                            if (arr.length != 0) {
+                                if(arr.length < 2){
+                                    var get_typeFromId = arr[0];
+                                }else{
+                                    var get_typeFromId = "";
+                                    for (var i = 0; i < arr.length; i++) {
+                                        if (get_typeFromId == "") {
+                                            if (parent.frames[0].Xrm.Page.getAttribute(arr[i]).getValue() == null) {
+                                                var get_typeFromId = arr[i];
+                                            }
                                         }
                                     }
                                 }
-                            } else {
-                                alert("Неизвестный тип расположения.\nСообщите о данной проблеме программисту.");
+                            }else {
+                                alert("Невідомий тип розташування.\nПовідомте про дану проблему відділ тех підтримки");                                
+                                console.log(_rgc_type_value);
                             }
-                            //var get_typeFromId = getTypeField(_rgc_type_value);
-                            //console.log(lookup);
+
                             if (get_typeFromId == "line3") {
                                 parent.frames[0].Xrm.Page.getAttribute(get_typeFromId).setValue(line3);
                             } else {
